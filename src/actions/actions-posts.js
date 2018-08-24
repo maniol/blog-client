@@ -1,4 +1,4 @@
-
+import uuid from 'uuid';
 // Export Constants
 export const ADD_POST = 'ADD_POST';
 export const GET_POSTS = 'ADD_POSTS';
@@ -13,6 +13,7 @@ export function addPost(post) {
   return {
     type: ADD_POST,
     post,
+    id: uuid.v4()
   };
 }
 
@@ -41,7 +42,7 @@ export function editPost(id, post) {
   return {
     type: EDIT_POST,
     id,
-    post,
+    post
   };
 }
 

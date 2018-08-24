@@ -6,7 +6,8 @@ import { Switch, Route } from 'react-router-dom';
 import HomeComponent from './Home.component';
 import AboutComponent from './About.component';
 import PostListContainer from '../containers/PostList.container';
-import AddNewPostFormContainer from '../containers/AddNewPostForm.container';
+import AddPostFormContainer from '../containers/AddPostForm.container';
+import EditPostFormContainer from '../containers/EditPostForm.container';
 import TopNavigation from './TopNavigation.component';
 
 
@@ -18,7 +19,7 @@ const App = () => {
       	<Route exact path="/" component={HomeComponent} />
       	<Route exact path="/about" component={AboutComponent} />
       	<Route exact path="/posts" component={PostListContainer} />
-        <Route exact path="/addnewpost" component={AddNewPostFormContainer} />
+        <Route exact path="/addnewpost" component={AddPostFormContainer} />
     	</Switch>
    	</div>
     )
