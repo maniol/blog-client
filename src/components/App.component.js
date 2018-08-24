@@ -20,6 +20,7 @@ const App = () => {
       	<Route exact path="/about" component={AboutComponent} />
       	<Route exact path="/posts" component={PostListContainer} />
         <Route exact path="/addnewpost" component={AddPostFormContainer} />
+        <Route exact path="/editpost" component={EditPostFormContainer} />
     	</Switch>
    	</div>
     )

@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 
 class EditPostForm extends Component {
   constructor(props) {
-    console.log(props)
     super(props);
     this.state = {
         author: this.props.author,
@@ -11,6 +10,7 @@ class EditPostForm extends Component {
         text: this.props.text,
         redirect: false
     };
+    console.log(this.props)
   }
 
   handleSubmit() {

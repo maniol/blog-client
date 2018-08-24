@@ -11,7 +11,7 @@ const Post = ({id, title, text, author, votes, thumbUpPost, thumbDownPost, remov
 			<button onClick={() => thumbUpPost(id)}>Thumb up</button>
 			<button onClick={() => thumbDownPost(id)}>Thumb down</button>
 			<button>
-				<Link to="/editpost">Edit</Link>
+				<Link to="/editpost" params={{id:id, title:title, text:text, author:author}}>Edit</Link>
 			</button>
 			<button onClick={() => removePost(id)}>X</button>
 		</div>
