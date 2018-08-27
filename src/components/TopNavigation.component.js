@@ -1,24 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
 
 //Import Style
+import {
+  Nav,
+  NavItem } from 'reactstrap';
 
 const TopNavigation = (props) => (
 	<div>
-		<nav className="navbar navbar-default">
-			<div className="container-fluid">
-					<ul className="nav navbar-nav">
-						<li><Link to="/">Home</Link></li>
-						<li><Link to="/about">About</Link></li>
-						<li><Link to="/posts">Posts</Link></li>
-					</ul>
-			</div>
-		</nav>
-		<div className="container-fluid">
-			{props.children}
-		</div>
+			<Nav pills>
+				<NavItem><Link to="/">Home</Link></NavItem>
+				<NavItem><Link to="/about">About</Link></NavItem>
+				<NavItem><Link to="/posts">Posts</Link></NavItem>
+			</Nav>
+			 <hr />
 	</div>
 )
 

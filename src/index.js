@@ -7,6 +7,9 @@ import store from './store/store';
 
 import App from './components/App.component';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './resources/css/custom_style.css'
+
 ReactDOM.render (
 	<Provider store={store}>
 		<Router history={createHistory()}>

@@ -1,8 +1,8 @@
 import uuid from 'uuid';
 // Export Constants
 export const ADD_POST = 'ADD_POST';
-export const GET_POSTS = 'ADD_POSTS';
-export const GET_POST = 'ADD_POSTS';
+export const GET_POSTS = 'GET_POSTS';
+export const GET_POST = 'GET_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const THUMBUP_POST = 'THUMBUP_POST';
@@ -38,10 +38,11 @@ export function removePost(id) {
   };
 }
 
-export function editPost(id, post) {
+//when id param is added, post becomes unidentified hence action.post.id in reducer line 31
+export function editPost(post) {
+  console.log(post)
   return {
     type: EDIT_POST,
-    id,
     post
   };
 }
@@ -53,7 +54,7 @@ export function thumbUpPost(id, post) {
     post
   };
 }
-
+//post is unindentified
 export function thumbDownPost(id, post) {
   return {
     type: THUMBDOWN_POST,

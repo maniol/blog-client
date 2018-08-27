@@ -1,21 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import EditPostFormContainer from '../containers/EditPostForm.container';
-
+import { Button, ButtonGroup, Container, Row, Col, Card, CardHeader, CardBody, CardText, CardFooter } from 'reactstrap';
 const Post = ({id, title, text, author, votes, thumbUpPost, thumbDownPost, removePost, editPost}) =>
-	<li>
-		<h1>{title}</h1>
-		<p>{text}</p>
-		<span>votes: {votes}</span>
-		<div>
-			<button onClick={() => thumbUpPost(id)}>Thumb up</button>
-			<button onClick={() => thumbDownPost(id)}>Thumb down</button>
-			<button>
-				<Link to="/editpost" params={{id:id, title:title, text:text, author:author}}>Edit</Link>
-			</button>
-			<button onClick={() => removePost(id)}>X</button>
-		</div>
-	</li>
+	(
+		<Container>
+			<Row>
+				<Col sm="12" lg={{size: 6, offset: 3}}>
+					<Card>
+						<CardHeader>{title}</CardHeader>
+						<CardBody>
+							<CardText>
+								{text}
+								<p className="mt-5 text-muted"><b>By {author}</b></p>
+								<p className="float-right">votes: {votes}</p>
+							</CardText>
+						</CardBody>
+						<CardFooter>
+							<Row>
+								<Button outline color="secondary" size="sm" onClick={() => thumbUpPost(id)}><i class="fas fa-thumbs-up"></i></Button>
+								<Button outline color="secondary" size="sm" onClick={() => thumbDownPost(id)}><i class="fas fa-thumbs-down"></i></Button>
+								<Button color="primary "size="sm">
+									<Link to={{
+										pathname: "/editpost",
+										state: {
+											id:id,
+											title:title,
+											text:text,
+											author:author
+										}}}>Edit</Link>
+								</Button>
+								<Button color="danger" size="sm" onClick={() => removePost(id)}>Delete</Button>
+							</Row>
+						</CardFooter>
+					</Card>
+				</Col>
+			</Row>
+		</Container>
+	)
 
 export default Post;
 

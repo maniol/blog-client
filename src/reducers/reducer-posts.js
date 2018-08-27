@@ -1,9 +1,10 @@
-import { ADD_POST, DELETE_POST, EDIT_POST, THUMBUP_POST, THUMBDOWN_POST } from '../actions/actions-posts';
+  import { ADD_POST, DELETE_POST, EDIT_POST, THUMBUP_POST, THUMBDOWN_POST, GET_POSTS } from '../actions/actions-posts';
 
 // Initial State
 const initialState = { data: [] };
 
 const PostsReducer = (state = initialState, action) => {
+  console.log(action)
   switch (action.type) {
     case ADD_POST :
       return {data: [{
@@ -15,6 +16,11 @@ const PostsReducer = (state = initialState, action) => {
       }
       , ...state.data]};
 
+    case GET_POSTS:
+      return {
+        data: Object.assign({}, state.data, state.data),
+      };
+
     case DELETE_POST :
       return {
         data: state.data.filter(post => post.id !== action.id),
@@ -22,7 +28,7 @@ const PostsReducer = (state = initialState, action) => {
 
     case EDIT_POST :
       return {
-        data: state.data.map(post => { return post.id === action.id ? Object.assign({}, post, action.post) : post } ),
+        data: state.data.map(post => { return post.id === action.post.id ? Object.assign({}, post, action.post) : post } ),
       };
 
     case THUMBUP_POST :
@@ -37,7 +43,7 @@ const PostsReducer = (state = initialState, action) => {
     case THUMBDOWN_POST :
       return {
         data: state.data.map(post => {
-          if (post.cuid === action.cuid) {
+          if (post.id === action.id) {
             return {...post, votes: post.votes -= 1 }
             }
           return post;
@@ -50,8 +56,8 @@ const PostsReducer = (state = initialState, action) => {
 
 /* Selectors */
 
-// Get all posts
-export const getPosts = state => state.posts.data;
+/*// Get all posts
+export const getPosts = state => state.posts.data;*/
 
 // Get post by id
 export const getPost = (state, id) => state.posts.data.filter(post => post.id === id)[0];

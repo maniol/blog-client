@@ -1,9 +1,10 @@
 import {connect} from 'react-redux';
 import EditPostForm from '../components/EditPostForm.component';
-import { editPost } from '../actions/actions-posts';
+import { editPost, getPosts } from '../actions/actions-posts';
 
 const mapDispatchToProps = dispatch => ({
-		editPost: (id, post) => dispatch(editPost(id, post))
+		editPost: (post) => dispatch(editPost(post)),
+		getPosts: () => dispatch(getPosts())
 })
 
 
