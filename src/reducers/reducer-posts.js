@@ -1,37 +1,37 @@
-  import { ADD_POST, DELETE_POST, EDIT_POST, THUMBUP_POST, THUMBDOWN_POST, GET_POSTS } from '../actions/actions-posts';
+import { ADD_POST, DELETE_POST, EDIT_POST, THUMBUP_POST, THUMBDOWN_POST, GET_POSTS } from '../actions/actions-posts';
+import callApi from './../helpers/callApi.js';
 
 // Initial State
 const initialState = { data: [] };
-
+const API_URL = 'http://localhost:3001/';
 const PostsReducer = (state = initialState, action) => {
   console.log(action)
   switch (action.type) {
-    case ADD_POST :
+    case ADD_POST:
       return {data: [{
         id: action.id,
         title: action.post.title,
         text: action.post.text,
         author: action.post.author,
         votes: 0
-      }
-      , ...state.data]};
+      }, ...state.data]};
 
     case GET_POSTS:
       return {
         data: Object.assign({}, state.data, state.data),
       };
 
-    case DELETE_POST :
+    case DELETE_POST:
       return {
         data: state.data.filter(post => post.id !== action.id),
       };
 
-    case EDIT_POST :
+    case EDIT_POST:
       return {
         data: state.data.map(post => { return post.id === action.post.id ? Object.assign({}, post, action.post) : post } ),
       };
 
-    case THUMBUP_POST :
+    case THUMBUP_POST:
       return {
         data: state.data.map(post => {
           if (post.id === action.id) {
@@ -40,7 +40,7 @@ const PostsReducer = (state = initialState, action) => {
           return post;
         })
       };
-    case THUMBDOWN_POST :
+    case THUMBDOWN_POST:
       return {
         data: state.data.map(post => {
           if (post.id === action.id) {

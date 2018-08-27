@@ -1,4 +1,5 @@
 import uuid from 'uuid';
+import callApi from './../helpers/callApi';
 // Export Constants
 export const ADD_POST = 'ADD_POST';
 export const GET_POSTS = 'GET_POSTS';
@@ -14,6 +15,23 @@ export function addPost(post) {
     type: ADD_POST,
     post,
     id: uuid.v4()
+  };
+}
+
+export function addPostRequest(post) {
+	console.log('im in before return');
+  return (dispatch) => {
+console.log('im in addPostRequest', post);
+    return callApi('posts', 'post', {
+      post: {
+        name: post.name,
+        title: post.title,
+        content: post.content,
+      },
+    }).then(res => {
+console.log('response', res);
+	return addPost(res.post);
+});
   };
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col } from 'reactstrap';
+import {addPostRequest} from './../actions/actions-posts';
 
 class AddPostForm extends Component {
 	constructor(props) {
@@ -11,12 +12,19 @@ class AddPostForm extends Component {
 			text: '',
 			redirect: false
 		};
+this.handleAddPost = this.handleAddPost.bind(this);
+	}
+
+	handleAddPost(post, e) {
+		e.preventDefault();
+		console.log('handleAddPost', post);
+		this.props.dispatch(addPostRequest(post));
 	}
 
 	handleSubmit() {
 		const post = this.state;
 		this.props.addPost(post);
-		this.setState( {
+		this.setState({
 			author: '',
 			title: '',
 			text: '',
@@ -63,7 +71,7 @@ class AddPostForm extends Component {
 										placeholder="Post Author"
 									/>
 								</FormGroup>
-									<Button color="primary" className="float-right" onClick={this.handleSubmit.bind(this)}>Submit</Button>
+									<Button color="primary" className="float-right" onClick={(ev) => this.handleAddPost({author: this.state.author, text: this.state.text, title: this.state.title}, ev)}>Submit</Button>
 							</Form>
 						</Col>
 					</Row>
