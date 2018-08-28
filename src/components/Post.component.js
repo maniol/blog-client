@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, ButtonGroup, Container, Row, Col, Card, CardHeader, CardBody, CardText, CardFooter } from 'reactstrap';
+import { Button, Container, Row, Col, Card, CardHeader, CardBody, CardText, CardFooter } from 'reactstrap';
 const Post = ({id, title, text, author, votes, thumbUpPost, thumbDownPost, removePost, editPost}) =>
 	(
 		<Container>
