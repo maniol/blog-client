@@ -1,24 +1,37 @@
-  import { ADD_POST, DELETE_POST, EDIT_POST, THUMBUP_POST, THUMBDOWN_POST, GET_POSTS } from '../actions/actions-posts';
-
+  import { ADD_POST, ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST, EDIT_POST, THUMBUP_POST, THUMBDOWN_POST, GET_POSTS, GET_POSTS_SUCCESS, GET_POSTS_FAILURE } from '../actions/actions-posts';
 // Initial State
-const initialState = { data: [] };
+const initialState = {
+  data: [],
+  error: undefined
+  };
 
 const PostsReducer = (state = initialState, action) => {
-  console.log(action)
   switch (action.type) {
     case ADD_POST :
-      return {data: [{
-        id: action.id,
-        title: action.post.title,
-        text: action.post.text,
-        author: action.post.author,
-        votes: 0
-      }
-      , ...state.data]};
+      return { data: state.data };
+
+    case ADD_POST_SUCCESS :
+      return {data: [action.post, ...state.data],
+      };
+
+    case ADD_POST_FAILURE :
+      return {
+        data: Object.assign({}, state, {error: action.error}),
+      };
 
     case GET_POSTS:
+       return Object.assign({}, state, {
+        data: state.data
+      });
+
+    case GET_POSTS_SUCCESS:
+       return Object.assign({}, state, {
+        data: action.posts
+      });
+
+    case GET_POSTS_FAILURE:
       return {
-        data: Object.assign({}, state.data, state.data),
+        data: Object.assign({}, state, {error: action.error}),
       };
 
     case DELETE_POST :
@@ -64,3 +77,7 @@ export const getPost = (state, id) => state.posts.data.filter(post => post.id ==
 
 // Export Reducer
 export default PostsReducer;
+
+
+
+
