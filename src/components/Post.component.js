@@ -11,14 +11,14 @@ const Post = ({id, title, text, author, votes, thumbUpPost, thumbDownPost, remov
 						<CardBody>
 							<CardText>
 								{text}
-								<p className="mt-5 text-muted"><b>By {author}</b></p>
-								<p className="float-right">votes: {votes}</p>
 							</CardText>
+							<p className="mt-5 text-muted"><b>By {author}</b></p>
+							<p className="float-right">votes: {votes}</p>
 						</CardBody>
 						<CardFooter>
 							<Row>
-								<Button outline color="secondary" size="sm" onClick={() => thumbUpPost(id)}><i class="fas fa-thumbs-up"></i></Button>
-								<Button outline color="secondary" size="sm" onClick={() => thumbDownPost(id)}><i class="fas fa-thumbs-down"></i></Button>
+								<Button outline color="secondary" size="sm" onClick={() => thumbUpPost(id, votes)}><i className="fas fa-thumbs-up"></i></Button>
+								<Button outline color="secondary" size="sm" onClick={() => thumbDownPost(id, votes)}><i className="fas fa-thumbs-down"></i></Button>
 								<Button color="primary "size="sm">
 									<Link to={{
 										pathname: "/editpost",

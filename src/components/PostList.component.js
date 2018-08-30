@@ -4,7 +4,6 @@ import { Button } from 'reactstrap'
 import PostContainer from '../containers/Post.container';
 const PostList = (props) =>
 {
-	console.log(props.posts)
 	return(
 		<div className="container">
 			<h1>Check out the latest posts...</h1>

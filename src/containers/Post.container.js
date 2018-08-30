@@ -4,8 +4,8 @@ import {thumbUpPost, thumbDownPost, removePost } from '../actions/actions-posts'
 
 
 const mapDispatchToProps = dispatch => ({
-	thumbUpPost: (id) => dispatch(thumbUpPost(id)),
-	thumbDownPost: (id) => dispatch(thumbDownPost(id)),
+	thumbUpPost: (id, votes) => dispatch(thumbUpPost(id, votes)),
+	thumbDownPost: (id, votes) => dispatch(thumbDownPost(id, votes)),
 	removePost: (id) => dispatch(removePost(id)),
 	});
 

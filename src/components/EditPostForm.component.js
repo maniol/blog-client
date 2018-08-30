@@ -17,7 +17,6 @@ class EditPostForm extends Component {
 	handleSubmit() {
 		const post = this.state;
 		this.props.editPost(post);
-
 		this.setState( {
 			author: '',
 			title: '',

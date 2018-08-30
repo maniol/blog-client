@@ -1,4 +1,4 @@
-  import { ADD_POST, ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST, EDIT_POST, THUMBUP_POST, THUMBDOWN_POST, GET_POSTS, GET_POSTS_SUCCESS, GET_POSTS_FAILURE } from '../actions/actions-posts';
+  import { ADD_POST, ADD_POST_SUCCESS, ADD_POST_FAILURE, DELETE_POST, DELETE_POST_SUCCESS, DELETE_POST_FAILURE, EDIT_POST,EDIT_POST_SUCCESS, EDIT_POST_FAILURE, THUMBUP_POST, THUMBUP_POST_SUCCESS, THUMBUP_POST_FAILURE, THUMBDOWN_POST, THUMBDOWN_POST_SUCCESS, THUMBDOWN_POST_FAILURE, GET_POSTS, GET_POSTS_SUCCESS, GET_POSTS_FAILURE } from '../actions/actions-posts';
 // Initial State
 const initialState = {
   data: [],
@@ -35,32 +35,72 @@ const PostsReducer = (state = initialState, action) => {
       };
 
     case DELETE_POST :
+      return Object.assign({}, state, {
+        data: state.data
+      });
+
+    case DELETE_POST_SUCCESS :
       return {
         data: state.data.filter(post => post.id !== action.id),
       };
 
+    case DELETE_POST_FAILURE :
+      return {
+        data: Object.assign({}, state, {error: action.error}),
+      };
+
     case EDIT_POST :
+      return Object.assign({}, state, {
+        data: state.data
+      });
+
+    case EDIT_POST_SUCCESS :
       return {
         data: state.data.map(post => { return post.id === action.post.id ? Object.assign({}, post, action.post) : post } ),
       };
 
+    case EDIT_POST_FAILURE :
+      return {
+        data: Object.assign({}, state, {error: action.error}),
+      };
+
     case THUMBUP_POST :
+      return Object.assign({}, state, {
+        data: state.data
+      });
+
+    case THUMBUP_POST_SUCCESS :
       return {
         data: state.data.map(post => {
           if (post.id === action.id) {
-            return {...post, votes: post.votes += 1 }
+            return {...post, votes: action.votes }
             }
           return post;
         })
       };
+
+    case THUMBUP_POST_FAILURE :
+      return {
+        data: Object.assign({}, state, {error: action.error}),
+      };
+
     case THUMBDOWN_POST :
+      return Object.assign({}, state, {
+        data: state.data
+      })
+
+     case THUMBDOWN_POST_SUCCESS :
       return {
         data: state.data.map(post => {
           if (post.id === action.id) {
-            return {...post, votes: post.votes -= 1 }
+            return {...post, votes: action.votes }
             }
           return post;
         })
+      };
+     case THUMBDOWN_POST_FAILURE :
+      return {
+        data: Object.assign({}, state, {error: action.error}),
       };
     default:
       return state;

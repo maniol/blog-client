@@ -15,12 +15,6 @@ class AddPostForm extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	/*handleAddPost(post, e) {
-		e.preventDefault();
-		console.log('handleAddPost', post);
-		this.props.dispatch(addPostRequest(post));
-	}*/
-
 	handleSubmit() {
 		const post = this.state;
 		this.props.dispatch(addPost(post));
