@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-/*import callApi from './../helpers/callApi';*/
+
 // Export Constants
 export const ADD_POST = 'ADD_POST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
@@ -30,25 +30,22 @@ export const THUMBDOWN_POST_FAILURE = 'THUMBDOWN_POST_FAILURE';
 // Export Actions
 
 export function fetchPosts() {
-  // Instead of plain objects, we are returning function.
   return function(dispatch) {
-    // Dispatching REQUEST action, which tells our app, that we are started requesting todos.
     dispatch({
       type: 'GET_POSTS'
     });
-    return fetch('/posts')
-      // Here, we are getting json body(in our case it will contain `todos` or `error` prop, depending on request was failed or not) from server response
-      // And providing `response` and `body` variables to the next chain.
+    return fetch('/posts',
+      { method: "GET", headers: { "Content-Type": "application/json"},
+      credentials: "same-origin"
+      })
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
         if (!response.ok) {
-          // If request was failed, dispatching FAILURE action.
           dispatch({
             type: 'GET_POSTS_FAILURE',
             error: body.error
           });
         } else {
-          // When everything is ok, dispatching SUCCESS action.
           dispatch({
             type: 'GET_POSTS_SUCCESS',
             posts: body.posts
@@ -57,7 +54,6 @@ export function fetchPosts() {
       });
   }
 }
-
 
 export function addPost(post) {
   const randomId = uuid.v4();
@@ -69,9 +65,7 @@ export function addPost(post) {
         _id: randomId,
         votes: 0
       };
-  // Instead of plain objects, we are returning function.
   return function(dispatch) {
-    // Dispatching REQUEST action, which tells our app, that we are started requesting todos.
     dispatch({
       type: 'ADD_POST'
     });
@@ -80,18 +74,14 @@ export function addPost(post) {
       { method: "POST", body: JSON.stringify(data), headers: { "Content-Type": "application/json"},
       credentials: "same-origin"
       })
-      // Here, we are getting json body(in our case it will contain `todos` or `error` prop, depending on request was failed or not) from server response
-      // And providing `response` and `body` variables to the next chain.
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
         if (!response.ok) {
-          // If request was failed, dispatching FAILURE action.
           dispatch({
             type: 'ADD_POST_FAILURE',
             error: body.error
           });
         } else {
-          // When everything is ok, dispatching SUCCESS action.
           dispatch({
             type: 'ADD_POST_SUCCESS',
             post: post
@@ -102,9 +92,7 @@ export function addPost(post) {
 }
 
 export function removePost(id) {
-  // Instead of plain objects, we are returning function.
   return function(dispatch) {
-    // Dispatching REQUEST action, which tells our app, that we are started requesting todos.
     dispatch({
       type: 'DELETE_POST'
     });
@@ -113,18 +101,13 @@ export function removePost(id) {
       { method: "DELETE", headers: { "Content-Type": "application/json"},
       credentials: "same-origin"
       })
-      // Here, we are getting json body(in our case it will contain `todos` or `error` prop, depending on request was failed or not) from server response
-      // And providing `response` and `body` variables to the next chain.
-      /*.then(response => response.json().then(body => ({ response, body })))*/
-      .then ( (response, error) => {
-        console.log(response)
+      .then ((response, error) => {
         if (!response.status === 200) {
           dispatch({
             type: 'DELETE_POST_FAILURE',
             error: error.message
           })
         } else {
-          // When everything is ok, dispatching SUCCESS action.
           dispatch({
             type: 'DELETE_POST_SUCCESS',
             id: id
@@ -136,9 +119,7 @@ export function removePost(id) {
 
 export function editPost(post) {
   post.votes = 0;
-  // Instead of plain objects, we are returning function.
   return function(dispatch) {
-    // Dispatching REQUEST action, which tells our app, that we are started requesting todos.
     dispatch({
       type: 'EDIT_POST'
     });
@@ -147,18 +128,14 @@ export function editPost(post) {
       { method: "PUT", body: JSON.stringify(post), headers: { "Content-Type": "application/json"},
       credentials: "same-origin"
       })
-      // Here, we are getting json body(in our case it will contain `todos` or `error` prop, depending on request was failed or not) from server response
-      // And providing `response` and `body` variables to the next chain.
       .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
         if (!response.ok) {
-          // If request was failed, dispatching FAILURE action.
           dispatch({
             type: 'EDIT_POST_FAILURE',
             error: body.error
           });
         } else {
-          // When everything is ok, dispatching SUCCESS action.
           dispatch({
             type: 'EDIT_POST_SUCCESS',
             post: body.post
@@ -171,9 +148,7 @@ export function editPost(post) {
 export function thumbUpPost(id, votes) {
   votes += 1
   const data = { votes: votes}
-  // Instead of plain objects, we are returning function.
   return function(dispatch) {
-    // Dispatching REQUEST action, which tells our app, that we are started requesting todos.
     dispatch({
       type: 'THUMBUP_POST'
     });
@@ -182,19 +157,14 @@ export function thumbUpPost(id, votes) {
       { method: "PUT", body: JSON.stringify(data), headers: { "Content-Type": "application/json"},
       credentials: "same-origin"
       })
-      // Here, we are getting json body(in our case it will contain `todos` or `error` prop, depending on request was failed or not) from server response
-      // And providing `response` and `body` variables to the next chain.
-      /*.then(response => response.json().then(body => ({ response, body })))*/
      .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
         if (!response.ok) {
-          // If request was failed, dispatching FAILURE action.
           dispatch({
             type: 'THUMBUP_POST_FAILURE',
             error: body.error
           });
         } else {
-          // When everything is ok, dispatching SUCCESS action.
           dispatch({
             type: 'THUMBUP_POST_SUCCESS',
             votes: body.post.votes,
@@ -205,13 +175,10 @@ export function thumbUpPost(id, votes) {
   }
 }
 
-
 export function thumbDownPost(id, votes) {
   votes -= 1
   const data = { votes: votes}
-  // Instead of plain objects, we are returning function.
   return function(dispatch) {
-    // Dispatching REQUEST action, which tells our app, that we are started requesting todos.
     dispatch({
       type: 'THUMBDOWN_POST'
     });
@@ -220,19 +187,14 @@ export function thumbDownPost(id, votes) {
       { method: "PUT", body: JSON.stringify(data), headers: { "Content-Type": "application/json"},
       credentials: "same-origin"
       })
-      // Here, we are getting json body(in our case it will contain `todos` or `error` prop, depending on request was failed or not) from server response
-      // And providing `response` and `body` variables to the next chain.
-      /*.then(response => response.json().then(body => ({ response, body })))*/
      .then(response => response.json().then(body => ({ response, body })))
       .then(({ response, body }) => {
         if (!response.ok) {
-          // If request was failed, dispatching FAILURE action.
           dispatch({
             type: 'THUMBDOWN_POST_FAILURE',
             error: body.error
           });
         } else {
-          // When everything is ok, dispatching SUCCESS action.
           dispatch({
             type: 'THUMBDOWN_POST_SUCCESS',
             votes: body.post.votes,

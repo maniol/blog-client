@@ -107,13 +107,6 @@ const PostsReducer = (state = initialState, action) => {
   }
 };
 
-/* Selectors */
-
-/*// Get all posts
-export const getPosts = state => state.posts.data;*/
-
-// Get post by id
-export const getPost = (state, id) => state.posts.data.filter(post => post.id === id)[0];
 
 // Export Reducer
 export default PostsReducer;
