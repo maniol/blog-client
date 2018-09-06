@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Row, Col, Card, CardHeader, CardBody, CardText, CardFooter } from 'reactstrap';
-const Post = ({id, title, text, author, votes, thumbUpPost, thumbDownPost, removePost, editPost}) =>
+
+const Post = ({_id, title, text, author, votes, thumbUpPost, thumbDownPost, removePost, editPost}) =>
 	(
 		<Container>
 			<Row>
@@ -17,19 +18,19 @@ const Post = ({id, title, text, author, votes, thumbUpPost, thumbDownPost, remov
 						</CardBody>
 						<CardFooter>
 							<Row>
-								<Button outline color="secondary" size="sm" onClick={() => thumbUpPost(id, votes)}><i className="fas fa-thumbs-up"></i></Button>
-								<Button outline color="secondary" size="sm" onClick={() => thumbDownPost(id, votes)}><i className="fas fa-thumbs-down"></i></Button>
+								<Button outline color="secondary" size="sm" onClick={() => thumbUpPost(_id, votes)}><i className="fas fa-thumbs-up"></i></Button>
+								<Button outline color="secondary" size="sm" onClick={() => thumbDownPost(_id, votes)}><i className="fas fa-thumbs-down"></i></Button>
 								<Button color="primary "size="sm">
 									<Link to={{
 										pathname: "/editpost",
 										state: {
-											id:id,
+											id:_id,
 											title:title,
 											text:text,
 											author:author
 										}}}>Edit</Link>
 								</Button>
-								<Button color="danger" size="sm" onClick={() => removePost(id)}>Delete</Button>
+								<Button color="danger" size="sm" onClick={() => removePost(_id)}>Delete</Button>
 							</Row>
 						</CardFooter>
 					</Card>

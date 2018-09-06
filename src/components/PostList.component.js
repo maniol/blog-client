@@ -11,7 +11,7 @@ const PostList = (props) =>
 				<Link to="/addnewpost">Add new post</Link>
 			</Button>
 			<ul>
-				{ props.posts.map(post => <PostContainer key={post.id} {...post}/>)}
+				{ props.posts.map(post => <PostContainer key={post._id} {...post}/>)}
 			</ul>
 		</div>
 		)

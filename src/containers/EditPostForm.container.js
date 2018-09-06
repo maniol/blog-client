@@ -3,7 +3,7 @@ import EditPostForm from '../components/EditPostForm.component';
 import { editPost } from '../actions/actions-posts';
 
 const mapDispatchToProps = dispatch => ({
-		editPost: (post) => dispatch(editPost(post)),
+	editPost: (post) => dispatch(editPost(post)),
 })
 
 

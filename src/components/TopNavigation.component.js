@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 //Import Style
 import {
-  Nav,
-  NavItem } from 'reactstrap';
+	Nav,
+	NavItem } from 'reactstrap';
 
 const TopNavigation = (props) => (
 	<div>
@@ -13,7 +13,7 @@ const TopNavigation = (props) => (
 				<NavItem><Link to="/about">About</Link></NavItem>
 				<NavItem><Link to="/posts">Posts</Link></NavItem>
 			</Nav>
-			 <hr />
+			<hr />
 	</div>
 )
 
